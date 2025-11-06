@@ -1,4 +1,4 @@
-async function getRandomUser() {
+async function getIndicadores() {
 
     try {
         const urlBase = await fetch("https://mindicador.cl/api/");
@@ -14,21 +14,33 @@ async function getRandomUser() {
 
 
        
+        btnConsulta.addEventListener("click", () => {
+            const cantidad = (inputCantidad.value);
+            const moneda = selectMoneda.value;
 
-       pResultado.textContent = `${data.dolar.valor}`
-        
+            pResultado.textContent = "";
+            
+            if (moneda === "dolar"){
+                pResultado.textContent = `Resultado:$ ${cantidad/data.dolar.valor} `
+            } else if (moneda === "uf"){
+                pResultado.textContent = `Resultado:$ ${cantidad/data.uf.valor}`
+            } else if (moneda === "utm"){
+                pResultado.textContent = `Resultado:$ ${cantidad/data.utm.valor}`
+            }
+            
+           
 
 
+        });
+    
+    } catch (error){
 
-
-    } catch (error) {
-        alert(error);
+        alert (error);
     }
-   
-
 }
 
-getRandomUser();
+
+getIndicadores();
 
 
 
