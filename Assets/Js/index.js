@@ -15,18 +15,25 @@ async function getIndicadores() {
 
        
         btnConsulta.addEventListener("click", () => {
-            const cantidad = (inputCantidad.value);
+            const cantidad = parseFloat(inputCantidad.value);
             const moneda = selectMoneda.value;
 
             pResultado.textContent = "";
+
+            let valorConversion;
             
             if (moneda === "dolar"){
-                pResultado.textContent = `Resultado:$ ${cantidad/data.dolar.valor} `
+                valorConversion = cantidad/data.dolar.valor;
             } else if (moneda === "uf"){
-                pResultado.textContent = `Resultado:$ ${cantidad/data.uf.valor}`
+                valorConversion = cantidad/data.uf.valor;
             } else if (moneda === "utm"){
-                pResultado.textContent = `Resultado:$ ${cantidad/data.utm.valor}`
+                valorConversion = cantidad/data.utm.valor;
             }
+
+            const resultadoFinal = parseFloat(valorConversion.toFixed(2));
+            pResultado.textContent = `Resultado: $${resultadoFinal}`;
+
+            
             
         });
     
